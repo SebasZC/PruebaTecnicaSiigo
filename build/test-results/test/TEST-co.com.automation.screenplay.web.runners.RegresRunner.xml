@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="co.com.automation.screenplay.web.runners.RegresRunner" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-07-11T04:31:35" hostname="DESKTOP-N6PAOPV" time="9.598">
+  <properties/>
+  <testcase name="Get a specific user and validate the response." classname="co.com.automation.screenplay.web.runners.RegresRunner" time="7.502"/>
+  <testcase name="Register a New User" classname="co.com.automation.screenplay.web.runners.RegresRunner" time="0.862"/>
+  <testcase name="Update a User" classname="co.com.automation.screenplay.web.runners.RegresRunner" time="0.667"/>
+  <testcase name="Delete a user" classname="co.com.automation.screenplay.web.runners.RegresRunner" time="0.563"/>
+  <system-out><![CDATA[{
+    "name": "Sebastian",
+    "job": "Automation Engineer",
+    "id": "189",
+    "createdAt": "2024-07-11T04:31:44.222Z"
+}
+POST: {
+    "name": "Sebastian",
+    "job": "Automation Engineer",
+    "id": "189",
+    "createdAt": "2024-07-11T04:31:44.222Z"
+}
+3
+{
+    "name": "Sebas put",
+    "job": "Automation put",
+    "updatedAt": "2024-07-11T04:31:44.949Z"
+}
+{
+    "name": "Sebas put",
+    "job": "Automation put",
+    "updatedAt": "2024-07-11T04:31:44.949Z"
+}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
