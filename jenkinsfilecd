@@ -20,7 +20,7 @@ pipeline {
                 if (fileExists(reportDir)) {
                     echo "Report directory exists: ${reportDir}"
                     // Listar los archivos en el directorio del reporte
-                    def files = bat(script: "dir ${reportDir}", returnStdout: true)
+                    def files = bat(script: "dir \"${reportDir}\"", returnStdout: true)
                     echo "Files in report directory:\n${files}"
                     publishHTML(target: [
                             allowMissing: false,
