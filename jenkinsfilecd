@@ -4,41 +4,36 @@ pipeline {
         jdk 'jdk17'
     }
     stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/SebasZC/PruebaTecnicaSiigo.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'gradle clean build'
+            }
+        }
         stage('Run Tests') {
             steps {
-                bat 'gradle build clean test aggregate --info'
-
+                bat 'gradle test aggregate'
             }
         }
     }
     post {
-        always {
-            script {
-                def reportDir = 'C:/Users/Sebas/.jenkins/workspace/CI-Pipeline-Regres/target/site/serenity'
-                echo "Checking if report directory exists: ${reportDir}"
-                if (fileExists(reportDir)) {
-                    echo "Report directory exists: ${reportDir}"
-                    // Listar los archivos en el directorio del reporte
-                    def files = bat(script: "dir \"${reportDir}\"", returnStdout: true).trim()
-                    echo "Files in report directory:\n${files}"
-                    publishHTML(target: [
-                            allowMissing         : false,
-                            alwaysLinkToLastBuild: true,
-                            keepAll              : true,
-                            reportDir            : reportDir,
-                            reportFiles          : 'index.html',
-                            reportName           : 'Serenity Test Report'
-                    ])
-                } else {
-                    echo "Report directory does not exist: ${reportDir}"
-                }
-            }
-        }
         success {
-            echo 'Tests succeeded'
+            echo 'Build and tests succeeded'
+            publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'build/reports/serenity',
+                    reportFiles: 'index.html',
+                    reportName: 'Serenity Report'
+            ])
         }
         failure {
-            echo 'Tests failed'
+            echo 'Build or tests failed'
         }
     }
 }
