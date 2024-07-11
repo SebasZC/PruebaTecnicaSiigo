@@ -11,7 +11,7 @@ pipeline{
         }
         stage('RunTest'){
             steps{
-                bat 'gradle clean aggregate --info'
+                bat 'gradle clean test aggregate --info'
             }
         }
         stage('Report'){
