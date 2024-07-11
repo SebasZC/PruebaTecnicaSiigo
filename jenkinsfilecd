@@ -4,7 +4,7 @@ pipeline {
         jdk 'jdk17'
     }
     stages {
-        stage('RunTest') {
+        stage('RunTests') {
             steps {
                 dir('C:/Users/Sebas/.jenkins/workspace/pipeline pruebas') {
                     bat 'gradle clean test aggregate --info'
@@ -13,6 +13,16 @@ pipeline {
         }
     }
     post {
+        always {
+            publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'C:/Users/Sebas/.jenkins/workspace/pipeline pruebas/target/site/serenity',
+                    reportFiles: 'index.html',
+                    reportName: 'Serenity Test Report'
+            ])
+        }
         success {
             echo 'Tests success'
         }
