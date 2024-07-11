@@ -32,13 +32,11 @@ public class PutAUser implements Task {
                 id= SharedContext.getVariable("idPost",null).toString();
             }
         }
-        System.out.println(id);
         t.attemptsTo(
                 Put.to(PATH_PUT_USER+id).with(requestSpecification -> requestSpecification
                         .header(HEADER_NAME_CONTENT_TYPE, HEADER_VALUE_CONTENT_TYPE)
                         .body(bodyCreate)
         ));
-        System.out.println(SerenityRest.lastResponse().getBody().prettyPrint());
         String idPost =null;
     }
 

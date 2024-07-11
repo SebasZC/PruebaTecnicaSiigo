@@ -36,6 +36,6 @@ Feature: I as a User want to validate various user management operations via the
   @TC_05 @register_with_email
   Scenario: Register a New user with email and password
     When the developer POST a new register with data
-      | email                 | password   |
-      | zapatasebas@gmail.com | Sebas123+/ |
-    Then the status code should be 201
+      | email              | password |
+      | eve.holt@reqres.in | pistol   |
+    Then the status code should be 200

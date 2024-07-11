@@ -35,7 +35,6 @@ public class PostAUser implements Task {
             idPost = SerenityRest.lastResponse().getBody().path("id").toString();
             SharedContext.setVariable("idPost",idPost);
         }
-        System.out.println("POST: "+SerenityRest.lastResponse().getBody().prettyPrint());
     }
 
     private static String replaceJsonValues(String input) {
