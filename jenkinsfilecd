@@ -1,31 +1,23 @@
-pipeline{
+pipeline {
     agent any
-    tools{
+    tools {
         jdk 'jdk17'
     }
-    stages{
-        stage('Checkout'){
-            steps{
-                git url: 'https://github.com/SebasZC/PruebaTecnicaSiigo.git'
-            }
-        }
-        stage('RunTest'){
-            steps{
-                bat 'gradle clean test aggregate --info'
-            }
-        }
-        stage('Report'){
-            steps{
-                bat '.\\target\\site\\serenity\\index.html'
+    stages {
+        stage('RunTest') {
+            steps {
+                dir('C:/Users/Sebas/.jenkins/workspace/pipeline pruebas') {
+                    bat 'gradle clean build -x test'
+                }
             }
         }
     }
-    post{
-        success{
-            echo 'Test success'
+    post {
+        success {
+            echo 'Tests success'
         }
-        failure{
-            echo 'Test Failed'
+        failure {
+            echo 'Tests Failed'
         }
     }
 }
