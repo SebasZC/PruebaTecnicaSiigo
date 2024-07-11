@@ -4,7 +4,7 @@ pipeline {
         jdk 'jdk17'
     }
     stages {
-        stage('RunTests') {
+        stage('Run Tests') {
             steps {
                 dir('C:/Users/Sebas/.jenkins/workspace/pipeline pruebas') {
                     bat 'gradle clean test aggregate --info'
@@ -15,12 +15,12 @@ pipeline {
     post {
         always {
             script {
-                def reportDir = 'C:/Users/Sebas/.jenkins/workspace/pipeline pruebas/target/site/serenity'
+                def reportDir = 'C:/Users/Sebas/.jenkins/workspace/CI-Pipeline-Regres/target/site/serenity'
                 echo "Checking if report directory exists: ${reportDir}"
                 if (fileExists(reportDir)) {
                     echo "Report directory exists: ${reportDir}"
                     // Listar los archivos en el directorio del reporte
-                    def files = bat(script: "dir \"${reportDir}\"", returnStdout: true)
+                    def files = bat(script: "dir \"${reportDir}\"", returnStdout: true).trim()
                     echo "Files in report directory:\n${files}"
                     publishHTML(target: [
                             allowMissing: false,
@@ -36,10 +36,10 @@ pipeline {
             }
         }
         success {
-            echo 'Tests success'
+            echo 'Tests succeeded'
         }
         failure {
-            echo 'Tests Failed'
+            echo 'Tests failed'
         }
     }
 }
