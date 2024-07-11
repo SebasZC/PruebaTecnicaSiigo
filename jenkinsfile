@@ -28,6 +28,20 @@ pipeline {
                 }
             }
         }
+        stage('Copy Performance Artifacts') {
+            steps {
+                script {
+                    def performanceSourceDir = 'performance'
+                    def performanceTargetDir = 'C:\\Users\\Sebas\\.jenkins\\workspace\\CD-Automation-Performance'
+                    bat """
+                        if not exist "${performanceTargetDir}" (
+                            mkdir "${performanceTargetDir}"
+                        )
+                        xcopy "${performanceSourceDir}" "${performanceTargetDir}" /E /H /Y /I
+                    """
+                }
+            }
+        }
     }
     post {
         success {
