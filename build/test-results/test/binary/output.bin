@@ -1,0 +1,23 @@
+{
+    "name": "Sebastian",
+"    "job": "Automation Engineer",
+    "id": "189",
+,    "createdAt": "2024-07-11T04:31:44.222Z"
+}
+POST: {
+    "name": "Sebastian",
+"    "job": "Automation Engineer",
+    "id": "189",
+,    "createdAt": "2024-07-11T04:31:44.222Z"
+}
+3
+{
+    "name": "Sebas put",
+    "job": "Automation put",
+,    "updatedAt": "2024-07-11T04:31:44.949Z"
+}
+{
+    "name": "Sebas put",
+    "job": "Automation put",
+,    "updatedAt": "2024-07-11T04:31:44.949Z"
+}
