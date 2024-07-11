@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    tools{
+        jdk 'jdk17'
+    }
+    stages{
+        stage('Checkout'){
+            steps{
+                git url: 'https://github.com/SebasZC/PruebaTecnicaSiigo.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                bat 'gradle clean build -x test'
+            }
+        }
+    }
+    post{
+        success{
+            echo 'Build success'
+        }
+        failure{
+            echo 'Build Failed'
+        }
+    }
+}
