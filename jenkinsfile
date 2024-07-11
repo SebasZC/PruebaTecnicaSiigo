@@ -1,25 +1,39 @@
-pipeline{
+pipeline {
     agent any
-    tools{
+    tools {
         jdk 'jdk17'
     }
-    stages{
-        stage('Checkout'){
-            steps{
+    stages {
+        stage('Checkout') {
+            steps {
                 git url: 'https://github.com/SebasZC/PruebaTecnicaSiigo.git'
             }
         }
-        stage('Build'){
-            steps{
+        stage('Build') {
+            steps {
                 bat 'gradle clean build -x test'
             }
         }
+        stage('Copy Build Artifacts') {
+            steps {
+                script {
+                    def sourceDir = 'C:\\Users\\Sebas\\.jenkins\\workspace\\CI-Automation-Regres'
+                    def targetDir = 'C:\\Users\\Sebas\\.jenkins\\workspace\\CD-Automation-Regres'
+                    bat """
+                        if not exist "${targetDir}" (
+                            mkdir "${targetDir}"
+                        )
+                        xcopy "${sourceDir}" "${targetDir}" /E /H /Y /I
+                    """
+                }
+            }
+        }
     }
-    post{
-        success{
+    post {
+        success {
             echo 'Build success'
         }
-        failure{
+        failure {
             echo 'Build Failed'
         }
     }
