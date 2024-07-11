@@ -7,7 +7,7 @@ pipeline {
         stage('RunTest') {
             steps {
                 dir('C:/Users/Sebas/.jenkins/workspace/pipeline pruebas') {
-                    bat 'gradle clean build -x test'
+                    bat 'gradle clean test aggregate --info'
                 }
             }
         }
