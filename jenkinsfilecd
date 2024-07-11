@@ -6,9 +6,8 @@ pipeline {
     stages {
         stage('Run Tests') {
             steps {
-                dir('C:/Users/Sebas/.jenkins/workspace/pipeline pruebas') {
-                    bat 'gradle clean test aggregate --info'
-                }
+                bat 'gradle build clean test aggregate --info'
+
             }
         }
     }
@@ -23,12 +22,12 @@ pipeline {
                     def files = bat(script: "dir \"${reportDir}\"", returnStdout: true).trim()
                     echo "Files in report directory:\n${files}"
                     publishHTML(target: [
-                            allowMissing: false,
+                            allowMissing         : false,
                             alwaysLinkToLastBuild: true,
-                            keepAll: true,
-                            reportDir: reportDir,
-                            reportFiles: 'index.html',
-                            reportName: 'Serenity Test Report'
+                            keepAll              : true,
+                            reportDir            : reportDir,
+                            reportFiles          : 'index.html',
+                            reportName           : 'Serenity Test Report'
                     ])
                 } else {
                     echo "Report directory does not exist: ${reportDir}"
