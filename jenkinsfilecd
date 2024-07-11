@@ -14,14 +14,21 @@ pipeline {
     }
     post {
         always {
-            publishHTML(target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'C:/Users/Sebas/.jenkins/workspace/pipeline pruebas/target/site/serenity',
-                    reportFiles: 'index.html',
-                    reportName: 'Serenity Test Report'
-            ])
+            script {
+                def reportDir = 'C:/Users/Sebas/.jenkins/workspace/pipeline pruebas/target/site/serenity'
+                if (fileExists(reportDir)) {
+                    publishHTML(target: [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll: true,
+                            reportDir: reportDir,
+                            reportFiles: 'index.html',
+                            reportName: 'Serenity Test Report'
+                    ])
+                } else {
+                    echo "Report directory does not exist: ${reportDir}"
+                }
+            }
         }
         success {
             echo 'Tests success'
